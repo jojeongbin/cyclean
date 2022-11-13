@@ -52,11 +52,12 @@ public class AccountController {
 //        UserAccount userAccount = (UserAccount) authResult.getPrincipal();
 //        String jwtToken = jwtProcessor.createJwtToken(userAccount);
 //        response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + " " + jwtToken);
-        return user.toString() + "\n 회원가입이 되었습니다.";
+        return user.toString() + "\n 로그인이 되었습니다.";
     }
 
     // register 값 넣기
     @PostMapping("/register")
+    @ResponseBody
     public String register(@RequestBody User user){
         String rawPassword = user.getPassword();
         String encPassword = passwordEncoder.encode(rawPassword);
