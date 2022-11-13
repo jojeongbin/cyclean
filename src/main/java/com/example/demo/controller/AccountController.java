@@ -39,9 +39,11 @@ public class AccountController {
     }
 
 
-    // 로그인 postmapping
+    // postmapping 수정해야 됨
+    // localhost8080/account/login 했을 시 body에 토큰 값 넘겨주기
+    // HttpServletResponse response, Authentication authResult
     @PostMapping("/login")
-    public String login(@RequestBody Map<String, String> users,  HttpServletResponse response, Authentication authResult){
+    public String login(@RequestBody Map<String, String> users){
         User user = userRepository.findByUsername(users.get("username"))
                 .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 username입니다."));
         if (!passwordEncoder.matches(users.get("password"), user.getPassword())){
