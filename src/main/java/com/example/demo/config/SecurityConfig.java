@@ -28,6 +28,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager(), jwtProcessor);
+        jwtAuthenticationFilter.setFilterProcessesUrl("/account/login");
         http
                 .csrf().disable()
                 .formLogin().disable()
@@ -36,9 +38,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http
                 .addFilter(corsFilter())
+                .addFilter(jwtAuthenticationFilter)
                 .addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtProcessor))
                 .addFilter(new JwtAuthorizationFilter(authenticationManager(), userRepository, jwtProcessor));
-
         http
                 .authorizeRequests()
                 .mvcMatchers("/account/**").permitAll() //** 홈페이지, login, register

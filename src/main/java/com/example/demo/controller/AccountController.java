@@ -25,6 +25,7 @@ public class AccountController {
 
 //    private final JwtProcessor jwtProcessor;
 
+    // login 조회
     @GetMapping("/login")
     public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView("account/login");
@@ -40,8 +41,7 @@ public class AccountController {
 
 
     // postmapping 수정해야 됨
-    // localhost8080/account/login 했을 시 body에 토큰 값 넘겨주기
-    // HttpServletResponse response, Authentication authResult
+    // localhost8080/account/login 했을 시 header에 토큰 값 넘겨주기
     @PostMapping("/login")
     public String login(@RequestBody Map<String, String> users){
         User user = userRepository.findByUsername(users.get("username"))
@@ -49,9 +49,6 @@ public class AccountController {
         if (!passwordEncoder.matches(users.get("password"), user.getPassword())){
             throw new IllegalStateException("잘못된 비밀번호 입니다.");
         }
-//        UserAccount userAccount = (UserAccount) authResult.getPrincipal();
-//        String jwtToken = jwtProcessor.createJwtToken(userAccount);
-//        response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + " " + jwtToken);
         return user.toString() + "\n 로그인이 되었습니다.";
     }
 
@@ -68,7 +65,7 @@ public class AccountController {
     }
 
     // user 권한을 가진 사용자가 들어갈 수 있은 시범용
-    @GetMapping("api/user")
+    @GetMapping("/api/user")
     @ResponseBody
     public String user(){
         // user 확인용

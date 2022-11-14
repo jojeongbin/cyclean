@@ -25,7 +25,7 @@ public class User {
     private String role;
 
     public List<String> getRoles(){
-        setRole("user");
+        setRole("USER");
         if(this.role.length() > 0){
             return Arrays.asList(this.role.split(","));
         }

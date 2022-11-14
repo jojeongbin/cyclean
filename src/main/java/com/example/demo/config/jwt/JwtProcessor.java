@@ -29,5 +29,4 @@ public class JwtProcessor {
         int pos = jwtHeader.lastIndexOf(" ");
         return jwtHeader.substring(pos + 1);
     }
-
 }
