@@ -24,11 +24,10 @@ public class User {
     @Column(length = 100)
     private String role;
 
-    public List<String> getRoles(){
-        setRole("USER");
-        if(this.role.length() > 0){
-            return Arrays.asList(this.role.split(","));
-        }
-        return new ArrayList<>();
-    }
+//    public List<String> getRoles(){
+//        if(this.role.length() > 0){
+//            return Arrays.asList(this.role.split(","));
+//        }
+//        return new ArrayList<>();
+//    }
 }

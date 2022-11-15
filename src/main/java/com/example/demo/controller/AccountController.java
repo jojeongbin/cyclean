@@ -4,14 +4,11 @@ import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,8 +19,6 @@ public class AccountController {
     private final UserRepository userRepository;
 
     private final BCryptPasswordEncoder passwordEncoder;
-
-//    private final JwtProcessor jwtProcessor;
 
     // login 조회
     @GetMapping("/login")
@@ -40,9 +35,9 @@ public class AccountController {
     }
 
 
-    // postmapping 수정해야 됨
     // localhost8080/account/login 했을 시 header에 토큰 값 넘겨주기
     @PostMapping("/login")
+    @ResponseBody
     public String login(@RequestBody Map<String, String> users){
         User user = userRepository.findByUsername(users.get("username"))
                 .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 username입니다."));
@@ -52,19 +47,19 @@ public class AccountController {
         return user.toString() + "\n 로그인이 되었습니다.";
     }
 
-    // register 값 넣기
+    // Json 반환 성공
     @PostMapping("/register")
     @ResponseBody
-    public String register(@RequestBody User user){
-        String rawPassword = user.getPassword();
-        String encPassword = passwordEncoder.encode(rawPassword);
-        user.setPassword(encPassword);
+    public User register(@RequestBody User user){
+//        user.setId(user.getId());
+//        user.setUsername(user.getUsername());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole("USER");
         userRepository.save(user);
-        return user.toString() + " \n 회원가입이 완료되었습니다.";
+        return user;
     }
 
-    // user 권한을 가진 사용자가 들어갈 수 있은 시범용
+    // user 권한을 가진 사용자가 들어갈 수 있은 테스트용
     @GetMapping("/api/user")
     @ResponseBody
     public String user(){
@@ -72,7 +67,7 @@ public class AccountController {
         return "user 권한이 있습니다.";
     }
 
-    // 정보가 잘 저장되었는지 확인하는 시범용
+    // 정보가 잘 저장되었는지 확인하는 테스트용
     @GetMapping("/users")
     public List<User> users() {
         return userRepository.findAll();

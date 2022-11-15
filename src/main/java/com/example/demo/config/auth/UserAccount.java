@@ -20,11 +20,8 @@ public class UserAccount implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        user.getRoles().forEach(r -> {
-            authorities.add(() -> {
-                return r;
-            });
-        });
+//        user.setRole("USER");
+        user.getRole();
         return authorities;
     }
 
