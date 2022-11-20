@@ -29,21 +29,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager(), jwtProcessor);
-        jwtAuthenticationFilter.setFilterProcessesUrl("/account/login");
+        jwtAuthenticationFilter.setFilterProcessesUrl("/account/login"); // login url 주소 account/login으로 수정
         http
                 .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)// 세션 사용 X
+                .and()
                 .formLogin().disable()
-                .httpBasic().disable();
-        http
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http
+                .httpBasic().disable()
+
                 .addFilter(corsFilter())
                 .addFilter(jwtAuthenticationFilter)
                 .addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtProcessor))
-                .addFilter(new JwtAuthorizationFilter(authenticationManager(), userRepository, jwtProcessor));
-        http
+                .addFilter(new JwtAuthorizationFilter(authenticationManager(), userRepository, jwtProcessor))
+
                 .authorizeRequests()
-                .mvcMatchers("/account/**").permitAll() //** 홈페이지, login, register
+                .mvcMatchers("/account/**").permitAll() //** -> login, register
+//                .mvcMatchers("/account/api/admin/**") // admin만 들어갈 수 있도록 권한을 줬는데도 계속 들어가지는 이유가 뭘까..
+//                .access("hasRole('ADMIN')")
+                .mvcMatchers("/account/api/user/**")
+                .access("hasRole('USER')")
                 .anyRequest().hasAuthority("USER");
     }
 
@@ -58,10 +62,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.addAllowedOriginPattern("*");
-        config.addAllowedHeader("*");
-        config.addAllowedMethod("*");
+        config.setAllowCredentials(true); // 서버가 json을 자바스크립트에서 처리할 수 있게 설정
+        config.addAllowedOriginPattern("*"); // 모든 ip 응답 허용
+        config.addAllowedHeader("*"); // 모든 header 응답 허용
+        config.addAllowedMethod("*"); // 모든 post, delete, put, get 등의 요청 허용
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }

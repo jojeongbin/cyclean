@@ -38,13 +38,15 @@ public class AccountController {
     // localhost8080/account/login 했을 시 header에 토큰 값 넘겨주기
     @PostMapping("/login")
     @ResponseBody
-    public String login(@RequestBody Map<String, String> users){
+//    public ModelAndView login(@RequestBody Map<String, String> users){
+    public User login(@RequestBody Map<String, String> users){
         User user = userRepository.findByUsername(users.get("username"))
                 .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 username입니다."));
-        if (!passwordEncoder.matches(users.get("password"), user.getPassword())){
+        if (!passwordEncoder.matches(users.get("password"), user.getPassword())) {
             throw new IllegalStateException("잘못된 비밀번호 입니다.");
         }
-        return user.toString() + "\n 로그인이 되었습니다.";
+//        return user.toString() + "\n 로그인이 되었습니다.";
+        return user;
     }
 
     // Json 반환 성공
@@ -55,6 +57,7 @@ public class AccountController {
 //        user.setUsername(user.getUsername());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole("USER");
+        user.setPoint(1000);
         userRepository.save(user);
         return user;
     }
@@ -65,6 +68,13 @@ public class AccountController {
     public String user(){
         // user 확인용
         return "user 권한이 있습니다.";
+    }
+
+    @GetMapping("/api/admin")
+    @ResponseBody
+    public String admin(){
+        // user 확인용
+        return "admin 권한이 있습니다.";
     }
 
     // 정보가 잘 저장되었는지 확인하는 테스트용

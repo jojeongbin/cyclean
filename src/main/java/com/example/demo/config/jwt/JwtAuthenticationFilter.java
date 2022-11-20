@@ -21,6 +21,7 @@ import java.io.IOException;
 
 @RequiredArgsConstructor
 @Slf4j
+// jwt 인증 클래스, UsernamePasswordAuthenticationFilter 가 로그인시 인증을 담당
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
     private final JwtProcessor jwtProcessor;
@@ -46,8 +47,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             Authentication authResult) throws IOException, ServletException {
         log.info("successfulAuthentication 실행됨 : 인증이 완료되었습니다.");
         UserAccount userAccount = (UserAccount) authResult.getPrincipal();
-
         String jwtToken = jwtProcessor.createJwtToken(userAccount);
+        // 로그인 인증 성공 시 header 부분에 Token 생성
         response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + " " + jwtToken);
     }
 }

@@ -24,6 +24,9 @@ public class User {
     @Column(length = 100)
     private String role;
 
+    @Column(length = 200)
+    private int point;
+
 //    public List<String> getRoles(){
 //        if(this.role.length() > 0){
 //            return Arrays.asList(this.role.split(","));

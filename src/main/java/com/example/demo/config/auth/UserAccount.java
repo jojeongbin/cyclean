@@ -3,6 +3,7 @@ package com.example.demo.config.auth;
 import com.example.demo.model.User;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
@@ -17,11 +18,30 @@ public class UserAccount implements UserDetails {
         this.user = user;
     }
 
+//    /**
+//     * 11월 17일 수정 ( 권한 관리 다시 수정 )
+//     */
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+////        user.getRole();
+//        authorities.add(new GrantedAuthority() {
+//            @Override
+//            public String getAuthority() {
+//                return user.getRole();
+//            }
+//        });
+//        return null;
+////        return authorities;
+//    }
+
+    /**
+     * 11월 19일 수정 ( 권한 관리 다시 수정 )
+     */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-//        user.setRole("USER");
-        user.getRole();
+        authorities.add(new SimpleGrantedAuthority("USER"));
         return authorities;
     }
 

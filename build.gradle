@@ -27,7 +27,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 
-	// jwt의존성 추가!
+	// jwt의존성 추가! HS512
 	implementation group: 'com.auth0', name: 'java-jwt', version: '3.19.2'
 
 	compileOnly 'org.projectlombok:lombok'
