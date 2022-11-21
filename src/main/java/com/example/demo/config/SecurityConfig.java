@@ -47,8 +47,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 /**
                  *  권한 설정
                  */
-                .mvcMatchers("/account/api/user") // USER 권한이 있으면 들어갈 수 있음
-                .access("hasAuthority('USER')")
+                .mvcMatchers("/account/api/user").access("hasAuthority('USER')") // USER 권한이 있으면 들어갈 수 있음
+                .mvcMatchers("/board/**").access("hasAuthority('USER')") // board 권한 수정
+                .mvcMatchers("/reply/**").access("hasAuthority('USER')") // reply 권한 수정
                 .anyRequest().hasAuthority("USER");
     }
     @Override

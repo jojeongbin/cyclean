@@ -38,7 +38,7 @@ public class AccountController {
     // localhost8080/account/login 했을 시 header에 토큰 값 넘겨주기
     @PostMapping("/login")
     @ResponseBody
-//    public ModelAndView login(@RequestBody Map<String, String> users){
+//    public String login(@RequestBody Map<String, String> users){
     public User login(@RequestBody Map<String, String> users){
         User user = userRepository.findByUsername(users.get("username"))
                 .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 username입니다."));
@@ -69,13 +69,6 @@ public class AccountController {
     public String user(){
         // user 확인용
         return "user 권한이 있습니다.";
-    }
-
-    @GetMapping("/api/admin")
-    @ResponseBody
-    public String admin(){
-        // 권한 확인용
-        return "admin 권한이 있습니다.";
     }
 
     // 정보가 잘 저장되었는지 확인하는 테스트용
