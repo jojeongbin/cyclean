@@ -55,6 +55,7 @@ public class AccountController {
     public User register(@RequestBody User user){
 //        user.setId(user.getId());
 //        user.setUsername(user.getUsername());
+        log.info("회원가입이 완료되었습니다.");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole("USER");
         user.setPoint(1000);

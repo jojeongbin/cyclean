@@ -32,7 +32,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     }
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        log.info("회원가입이 되었습니다.");
         log.info("인증이나 권한이 필요한 주소 요청이 됨");
         String jwtHeader = request.getHeader(HEADER_STRING);
 

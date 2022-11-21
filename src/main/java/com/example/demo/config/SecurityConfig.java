@@ -43,19 +43,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilter(new JwtAuthorizationFilter(authenticationManager(), userRepository, jwtProcessor))
 
                 .authorizeRequests()
-                .mvcMatchers("/account/register", "/account/login").permitAll() //** -> login, register
-//                .mvcMatchers("/account/api/admin/**") // admin만 들어갈 수 있도록 권한을 줬는데도 계속 들어가지는 이유가 뭘까..
-//                .access("hasRole('ADMIN')")
-//                .mvcMatchers("/account/api/user")
-//                .permitAll()
-//                .access("hasRole('USER')")
-                //TODO : 권한 설정하기 111월 21일 까지
+                .mvcMatchers("/account/register", "/account/login").permitAll() // login, register을 permitAll 해서 아무나 들어갈 수 있음
                 /**
-                 *  권한 설정 하기
+                 *  권한 설정
                  */
+                .mvcMatchers("/account/api/user") // USER 권한이 있으면 들어갈 수 있음
+                .access("hasAuthority('USER')")
                 .anyRequest().hasAuthority("USER");
     }
-
     @Override
     public void configure(WebSecurity web) throws Exception {
         web
