@@ -37,11 +37,14 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(User.getUsername(), User.getPassword());
 
+        // DB에 잇는 username과 password가 일치하면 token을 던저 준다.
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
         log.info("로그인이 완료되었습니다. username = {}" + authentication);
+        // 리턴의 이유는 권한 관리를 security가 대신 해주기 떄문에 편하려고 하는 거다.
         return authentication;
     }
 
+    // 인증이 완료되면 jwtProcessor에서 token을 만들어서 던저준다.
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {

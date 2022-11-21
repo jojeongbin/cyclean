@@ -73,7 +73,7 @@ public class AccountController {
     @GetMapping("/api/admin")
     @ResponseBody
     public String admin(){
-        // user 확인용
+        // 권한 확인용
         return "admin 권한이 있습니다.";
     }
 
