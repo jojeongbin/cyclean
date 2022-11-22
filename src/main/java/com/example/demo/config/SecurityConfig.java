@@ -44,14 +44,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .authorizeRequests()
                 .mvcMatchers("/account/register", "/account/login").permitAll() // login, register을 permitAll 해서 아무나 들어갈 수 있음
-                .mvcMatchers("/account/users").permitAll()
+
                 /**
-                 *  권한 설정
+                 * 권한을 permitAll로 수정
                  */
-                .mvcMatchers("/account/api/user").access("hasAuthority('USER')") // USER 권한이 있으면 들어갈 수 있음 ( 테스트 용 )
-                .mvcMatchers("/board/**").access("hasAuthority('USER')") // board 권한 수정
-                .mvcMatchers("/reply/**").access("hasAuthority('USER')") // reply 권한 수정
-                .anyRequest().hasAuthority("USER"); // 그외 다른 모든 경로도 USER만 들어갈 수 있도록 설정
+
+                .mvcMatchers("/account/users").permitAll()
+                .mvcMatchers("/board/**").permitAll()
+                .mvcMatchers("/reply/**").permitAll()
+                .mvcMatchers("/map", "/addMap").permitAll()
+                .anyRequest().permitAll();
+                /**
+                 *  권한 설정 User만 들어갈 수 있도록 수정
+                 */
+//                .mvcMatchers("/account/api/user").access("hasAuthority('USER')") // USER 권한이 있으면 들어갈 수 있음 ( 테스트 용 )
+//                .mvcMatchers("/board/**").access("hasAuthority('USER')") // board 권한 수정
+//                .mvcMatchers("/reply/**").access("hasAuthority('USER')") // reply 권한 수정
+//                .anyRequest().hasAuthority("USER"); // 그외 다른 모든 경로도 USER만 들어갈 수 있도록 설정
     }
     @Override
     public void configure(WebSecurity web) throws Exception {

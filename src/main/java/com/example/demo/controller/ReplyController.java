@@ -29,7 +29,6 @@ public class ReplyController {
         replyRepository.save(reply);
     }
 
-
     //댓글삭제
     @PostMapping("delete/{postid}/{replyno}/{userid}")
     public void deleteReply(@PathVariable Long postid, @PathVariable int replyno, @PathVariable String userid){
