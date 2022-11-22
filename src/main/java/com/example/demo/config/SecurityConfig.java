@@ -44,11 +44,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .authorizeRequests()
                 .mvcMatchers("/account/register", "/account/login").permitAll() // login, register을 permitAll 해서 아무나 들어갈 수 있음
-
                 /**
                  * 권한을 permitAll로 수정
                  */
-
                 .mvcMatchers("/account/users").permitAll()
                 .mvcMatchers("/board/**").permitAll()
                 .mvcMatchers("/reply/**").permitAll()

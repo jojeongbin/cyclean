@@ -33,6 +33,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         log.info("인증이나 권한이 필요한 주소 요청이 됨");
+        log.info("현재는 모든 권한을 permitAll로 수정하여 누구든지 들어갈 수 있도록 수정하였음");
         String jwtHeader = request.getHeader(HEADER_STRING);
 
         // header가 있는지 확인
