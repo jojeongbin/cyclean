@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import lombok.Data;
+import lombok.Getter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Data
 @Entity
+@Getter
 public class User {
 
     @Id
@@ -27,4 +29,11 @@ public class User {
     @Column(length = 200)
     private int point;
 
+    public void add50Point() {
+        this.point += 50;
+    }
+
+    public void usePoint(int reward) {
+        point -= reward;
+    }
 }
