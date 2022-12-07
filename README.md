@@ -1,8 +1,11 @@
 ## :earth_asia: 우리사이클린 프로젝트
 
-우리사이클린 프로젝트에서 백앤드를 담당했으며 reward 기능과 map 기능을 구현하였습니다.
+-  우리사이클린 프로젝트에서 백앤드를 담당했으며 reward 기능과 map 기능을 구현하였습니다.
 
-해당 파일은 회원가입, 게시판 기능에 reward와 map 기능을 merge한 파일입니다.
+-  해당 파일은 회원가입, 게시판 기능에 reward와 map 기능을 merge한 파일입니다.
+
+:link:프로젝트 organization-repository링크 
+https://github.com/separate-the-trash/capstone_project
 
 ## :heavy_check_mark: reward 기능 
 -  분리수거시 포인트 50씩 추가되고 기프티콘으로 교환 가능 
