@@ -21,4 +21,4 @@
              
           
 <img width="306" alt="KakaoTalk_20221121_200311480" src="https://user-images.githubusercontent.com/74054487/206088680-f40b5218-d6c6-4de7-8ecd-9528fe15c038.png">
-![KakaoTalk_20221121_142336957](https://user-images.githubusercontent.com/74054487/206088807-8afc1703-7a77-411d-af20-12aa9a755df1.png)
+![KakaoTalk_20221121_142336957](https://user-images.githubusercontent.com/74054487/206088871-db531e6c-2962-4f34-be7a-69049e0e7609.png)
