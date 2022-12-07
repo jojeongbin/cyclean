@@ -1,4 +1,4 @@
-## :heavy_check_mark: 우리사이클린 프로젝트
+## :earth_asia: 우리사이클린 프로젝트
 
 우리사이클린 프로젝트에서 백앤드를 담당했으며 reward 기능과 map 기능을 구현하였습니다.
 
@@ -21,4 +21,4 @@
              
           
 <img width="306" alt="KakaoTalk_20221121_200311480" src="https://user-images.githubusercontent.com/74054487/206088680-f40b5218-d6c6-4de7-8ecd-9528fe15c038.png">
-![KakaoTalk_20221121_142336957](https://user-images.githubusercontent.com/74054487/206088871-db531e6c-2962-4f34-be7a-69049e0e7609.png)
+
